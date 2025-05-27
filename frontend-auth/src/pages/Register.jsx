@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,10 +14,6 @@ const Register = () => {
     rol: "user",
   });
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  // Redirección si ya está autenticado
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
@@ -37,21 +34,19 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     if (formData.password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres.");
+      toast.error("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/register", formData);
-      setSuccess("Usuario registrado correctamente. Redirigiendo...");
+      await axios.post("http://localhost:5000/api/register", formData);
+      toast.success("Usuario registrado correctamente. Redirigiendo...");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Error al registrar");
+      toast.error(err.response?.data?.message || "Error al registrar");
     }
   };
 
@@ -59,9 +54,6 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
         <h2 className="text-2xl font-bold text-center mb-6">Crear Cuenta</h2>
-
-        {error && <p className="text-red-500 text-center mb-4 font-semibold">{error}</p>}
-        {success && <p className="text-green-600 text-center mb-4 font-semibold">{success}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input

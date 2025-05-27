@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Redirigir si ya está logueado
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
@@ -35,11 +34,11 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
+      toast.success("Inicio de sesión exitoso");
       navigate("/dashboard");
-      
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Error al iniciar sesión");
+      toast.error(err.response?.data?.message || "Error al iniciar sesión");
     }
   };
 
@@ -47,9 +46,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
-        {error && (
-          <p className="text-red-500 text-center mb-4 font-bold">{error}</p>
-        )}
+
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="email"

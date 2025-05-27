@@ -1,4 +1,8 @@
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Tus imports
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -57,6 +61,19 @@ const App = () => {
         {/* ruta no válida */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      {/* Toastify container global */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Router>
   );
 };
