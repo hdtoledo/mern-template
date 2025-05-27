@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ProductGallery from "../components/ProductGallery";
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -102,6 +103,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <ProductGallery />
 
       <footer className="w-full text-center text-gray-600 py-6">
         © {new Date().getFullYear()} MiProyecto. Todos los derechos reservados.

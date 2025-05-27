@@ -28,8 +28,6 @@ const Sidebar = ({ user: propUser, onLogout, menuOpen, setMenuOpen }) => {
     { name: "Dashboard", icon: <FaDashcube />, path: "/dashboard" },
     { name: "Usuarios", icon: <FaUser />, path: "/admin/usuarios" },
     { name: "Productos", icon: <FaBox />, path: "/admin/productos" },
-    { name: "Reportes", icon: <FaChartBar />, path: "/admin/reportes" },
-    { name: "Configuración", icon: <FaCog />, path: "/admin/config" },
   ];
 
   const userItems = [
