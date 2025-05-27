@@ -15,6 +15,9 @@ import Productos from "./pages/admin/Productos";
 import Reportes from "./pages/admin/Reportes";
 import AdminWelcome from "./components/Welcome";
 import NotFound from "./pages/NotFound";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -32,6 +35,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* dashboard único */}
         <Route

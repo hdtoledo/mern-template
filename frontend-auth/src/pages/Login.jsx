@@ -81,6 +81,15 @@ const Login = () => {
             Iniciar Sesión
           </button>
 
+          <p className="text-center text-gray-600">
+            <a
+              href="/forgot-password"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+          </p>
+
           <p className="text-center text-gray-600 mt-4">
             ¿No tienes cuenta?
             <a
@@ -92,10 +101,7 @@ const Login = () => {
           </p>
 
           <p className="text-center text-gray-600 mt-4">
-            <a
-              href="/"
-              className="text-blue-600 hover:underline font-medium"
-            >
+            <a href="/" className="text-blue-600 hover:underline font-medium">
               Regresar al Home
             </a>
           </p>
