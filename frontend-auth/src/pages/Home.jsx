@@ -76,33 +76,56 @@ const Home = () => {
         </div>
       </main>
 
-      <section id="features" className="w-full max-w-4xl py-16 text-center">
+      <section id="features" className="w-full max-w-6xl py-16 text-center">
         <h3 className="text-2xl font-bold text-gray-800 mb-6">
           Características principales
         </h3>
         <div className="grid md:grid-cols-3 gap-6 text-gray-700 px-4">
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Frontend moderno</h4>
+            <h4 className="font-semibold mb-2">Gestión de Productos</h4>
             <p>
-              React + Vite + TailwindCSS para desarrollo rápido y estilizado.
+              CRUD completo con subida de imágenes, vista previa, edición,
+              búsqueda y paginación desde un panel administrativo.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Autenticación</h4>
+            <h4 className="font-semibold mb-2">Scroll Infinito</h4>
             <p>
-              Integración con backend usando login seguro y redirección al
-              dashboard.
+              Vista pública con scroll infinito que carga dinámicamente los
+              productos destacados desde el backend.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Base escalable</h4>
+            <h4 className="font-semibold mb-2">Modal de Detalle</h4>
             <p>
-              Estructura organizada con rutas, controladores y componentes
-              reutilizables.
+              Visualización detallada de cada producto al hacer clic, usando
+              modales reutilizables.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h4 className="font-semibold mb-2">Autenticación JWT</h4>
+            <p>
+              Login, registro y protección de rutas mediante tokens. Roles de
+              usuario y administrador diferenciados.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h4 className="font-semibold mb-2">Recuperación de contraseña</h4>
+            <p>
+              Funcionalidad de “¿Olvidaste tu contraseña?” con generación de
+              token, correo de recuperación y formulario de reseteo.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h4 className="font-semibold mb-2">Correos automáticos</h4>
+            <p>
+              Envío de correos automáticos al registrarse y al solicitar
+              recuperación de contraseña usando nodemailer.
             </p>
           </div>
         </div>
       </section>
+
       <ProductGallery />
 
       <footer className="w-full text-center text-gray-600 py-6">

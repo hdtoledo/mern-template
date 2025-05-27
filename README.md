@@ -1,16 +1,18 @@
-# 🧠 Proyecto Base Full Stack MERN: Autenticación y Gestión de Usuarios
+
+# 🧠 Proyecto Base Full Stack MERN: Autenticación, Gestión de Usuarios y Productos
 
 Este proyecto es una **plantilla funcional avanzada** que integra un **frontend en React + Vite** con un **backend en Node.js + Express + MongoDB** para implementar:
 
 - Autenticación de usuarios con JWT.
-- Gestión de usuarios desde un panel administrativo.
-- CRUD de usuarios con consumo de API REST.
-- Roles diferenciados (`admin` y `user`).
-- Redirección dinámica basada en el rol.
-- Layouts reutilizables según el tipo de usuario.
+- Gestión y CRUD de usuarios desde un panel administrativo.
+- Recuperación de contraseña por correo electrónico.
+- CRUD de productos con carga de imágenes.
+- Visualización de productos en la página principal.
+- Modal de producto con detalles y opción de compra.
+- Scroll infinito para navegación de productos.
 - Scripts unificados de desarrollo con `concurrently`.
 
-Ideal como base para dashboards administrativos, aplicaciones SaaS, o sistemas internos empresariales.
+Ideal como base para dashboards administrativos, catálogos de productos o aplicaciones e-commerce básicas.
 
 ---
 
@@ -36,27 +38,69 @@ Ideal como base para dashboards administrativos, aplicaciones SaaS, o sistemas i
 
 ---
 
-## 🚀 ¿Qué incluye?
+## ✅ Frontend (React + Vite + TailwindCSS)
 
-### ✅ Frontend (React + Vite + TailwindCSS)
-- Login y Registro con validación.
-- Redirección automática al dashboard según el rol.
-- Layout dinámico para `admin` y `user`.
-- Tabla de usuarios con edición y eliminación.
-- Modal editable con animaciones y backdrop.
-- Sidebar responsive con visualización según rol.
+- Login, Registro y Recuperación de contraseña con validación.
+- Redirección dinámica según rol (`admin` / `user`).
+- Layout dinámico para cada tipo de usuario.
+- Dashboard administrativo con CRUD de usuarios y productos.
+- Modal para crear/editar productos con vista previa de imagen.
+- Galería de productos en Home con scroll infinito.
+- Modal para ver detalles del producto y comprar.
 - Protección de rutas mediante `PrivateRoute` y `AdminRoute`.
-
-### ✅ Backend (Node.js + Express + MongoDB)
-- Endpoints RESTful para login, registro y CRUD de usuarios.
-- Autenticación con JSON Web Tokens (JWT).
-- Encriptación de contraseñas con `bcrypt`.
-- Validación de roles (`admin` / `user`) y protección de rutas.
-- Arquitectura limpia con controladores y middlewares.
 
 ---
 
-## 🧪 Cómo correr el proyecto
+## ✅ Backend (Node.js + Express + MongoDB)
+
+- Endpoints RESTful para login, registro y CRUD de usuarios/productos.
+- Autenticación segura con JWT.
+- Encriptación de contraseñas con `bcrypt`.
+- Verificación por correo para recuperación de contraseña.
+- Subida de imágenes de productos con `multer`.
+- Controladores separados para usuarios y productos.
+- Middleware para validación de tokens y roles.
+
+---
+
+## 🖼 Capturas de pantalla
+
+A continuación, algunas vistas de la aplicación:
+
+1. **Pantalla de Home**
+   ![Login](./img/001.png)
+
+2. **Prudctos Modal**
+   ![Register](./img/002.png)
+
+3. **Login**
+   ![Dashboard Admin](./img/003.png)
+
+4. **Recuperar Contraseña**
+   ![Productos](./img/004.png)
+
+5. **Registro**
+   ![Galería](./img/005.png)
+
+6. **Dashboard ADMIN**
+   ![Modal Producto](./img/006.png)
+
+7. **Productos Admin**
+   ![Reset Password](./img/007.png)
+
+8. **Edicion de Productos**
+   ![Usuarios](./img/008.png)
+
+9. **Mobile View**
+   ![Editar Producto](./img/009.png)
+
+10. **Mobile View**
+    ![Responsive](./img/010.png)
+
+
+---
+
+## 🧪 ¿Cómo correr el proyecto?
 
 ### 1. Clonar el repositorio
 
@@ -71,76 +115,65 @@ cd mern-template
 npm install
 ```
 
-Este comando ejecuta tanto el frontend como el backend usando `concurrently`:
-
-```json
-"scripts": {
-  "dev": "concurrently \"npm run dev --prefix backend-mongodb\" \"npm run dev --prefix frontend-auth\""
-}
-```
-
 ### 3. Variables de entorno
+
+### 📧 Configuración de envío de correos (Gmail)
+
+Este proyecto utiliza **Gmail con clave de aplicación** para el envío de correos electrónicos (por ejemplo, confirmación de cuenta o recuperación de contraseña). Para que funcione correctamente:
+
+1. Accede a tu cuenta de Gmail.
+2. Activa la **verificación en dos pasos**.
+3. Ve a [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords).
+4. Genera una nueva **clave de aplicación** (elige "Correo" y "Otro").
+5. Copia la clave generada (16 caracteres) y úsala como valor de `EMAIL_APP_PASS`.
 
 #### Backend (`backend-mongodb/.env`)
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/auth_db
+MONGO_URI=mongodb://localhost:27017/mern_auth_products
 JWT_SECRET=tu_clave_secreta
-```
-
-### 4. Abrir en navegador
-
-```bash
-http://localhost:5173
-```
-
----
-
-## 🔐 Datos de ejemplo
-
-Puedes insertar usuarios desde MongoDB o registrarte desde el frontend. Para probar el panel `admin`, crea un usuario manualmente con:
-
-```json
-{
-  "nombre": "Admin",
-  "correo": "admin@example.com",
-  "password": "admin123",
-  "rol": "admin"
-}
+EMAIL_USER=tu_correo@gmail.com
+EMAIL_APP_PASS=tu_contraseña_app
 ```
 
 ---
 
 ## 🧰 Endpoints principales
 
-| Método | Ruta                    | Descripción                  |
-|--------|-------------------------|------------------------------|
-| POST   | `/api/register`         | Registro de usuario          |
-| POST   | `/api/login`            | Login de usuario             |
-| GET    | `/api/users`            | Obtener todos los usuarios   |
-| DELETE | `/api/users/:id`        | Eliminar usuario por ID      |
-| PUT    | `/api/users/:id`        | Actualizar usuario por ID    |
+### Autenticación
+| Método | Ruta                 | Descripción                        |
+|--------|----------------------|------------------------------------|
+| POST   | `/api/register`      | Registro de usuario                |
+| POST   | `/api/login`         | Inicio de sesión                   |
+| POST   | `/api/forgot-password` | Enviar link para reset de clave  |
+| POST   | `/api/reset-password/:token` | Restablecer contraseña       |
+
+### Usuarios
+| Método | Ruta             | Descripción                    |
+|--------|------------------|--------------------------------|
+| GET    | `/api/users`     | Listar usuarios                |
+| PUT    | `/api/users/:id` | Actualizar usuario             |
+| DELETE | `/api/users/:id` | Eliminar usuario               |
+
+### Productos
+| Método | Ruta                     | Descripción                   |
+|--------|--------------------------|-------------------------------|
+| GET    | `/api/productos`         | Listar productos              |
+| POST   | `/api/productos`         | Crear producto                |
+| PUT    | `/api/productos/:id`     | Editar producto               |
+| DELETE | `/api/productos/:id`     | Eliminar producto             |
 
 ---
 
-## 💡 Características destacadas
+## 🧠 Características técnicas adicionales
 
-- Panel admin responsive con TailwindCSS.
-- Modal con cierre por clic en fondo.
-- Sistema de roles con rutas protegidas.
-- Layouts reutilizables para estructura profesional.
-- Estructura escalable para agregar productos, pedidos, etc.
-
----
-
-## 📚 Recomendaciones de uso y ampliación
-
-- Agregar paginación y filtros en la tabla de usuarios.
-- Implementar token refresh o expiración.
-- Migrar autenticación a context o Zustand.
-- Implementar manejo de errores centralizados.
-- Conectar a MongoDB Atlas para producción.
+- ✉️ Notificaciones por correo para registro y recuperación.
+- 🖼 Vista previa de imagen antes de subir.
+- 🔁 Scroll infinito para productos.
+- 💾 Almacenamiento local de imágenes.
+- 🧩 Componentes desacoplados y reutilizables.
+- 🔒 Middleware personalizado para roles.
 
 ---
 
